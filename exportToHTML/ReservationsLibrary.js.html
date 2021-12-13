@@ -1,0 +1,332 @@
+<html>
+<head>
+<title>ReservationsLibrary.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #cc7832;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReservationsLibrary.js</font>
+</center></td></tr></table>
+<pre><span class="s0">/* 
+ * File: JSConsole.js 
+ * ------------------ 
+ * This file implements a replacement for the JavaScript system console 
+ * that installs itself in an element named JSConsole. 
+ * 
+ * The typical usage pattern for this file is to include a script tag 
+ * that reads in this file at the head section of the index.html file, 
+ * as follows: 
+ * 
+ *    &lt;script src=&quot;JSConsole.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; 
+ * 
+ * Given the order in which scripts are loaded, this file always creates 
+ * a new console object. On the first reference to the new console object, 
+ * the implementation checks to see whether an element exists with the 
+ * specified tag.  If no such element exists, the implementation creates 
+ * a new &lt;div&gt; element at the end of the &lt;body&gt; element with the missing 
+ * tag.  By default, the &lt;div&gt; used for the console takes up the entire 
+ * browser window, but this assumption can be changed by setting the 
+ * style explicitly using CSS. 
+ */</span>
+
+<span class="s2">&quot;use strict&quot;</span><span class="s3">;</span>
+
+<span class="s0">/* 
+ * Factory method: JSConsole 
+ * Usage: let console = JSConsole(); 
+ *        let console = JSConsole(id); 
+ *        let console = JSConsole(width, height); 
+ *        let console = JSConsole(id, width, height); 
+ * -------------------------------------------------- 
+ * Creates a new JSConsole object and installs it in the element specified 
+ * by id.  If id is missing, it defaults to &quot;JSConsole&quot;; if width and height 
+ * are missing, the size of the console defaults to the entire enclosing 
+ * window, although this value may be changed using CSS. 
+ */</span>
+
+<span class="s3">function </span><span class="s1">JSConsole(a1</span><span class="s3">, </span><span class="s1">a2</span><span class="s3">, </span><span class="s1">a3) {</span>
+    <span class="s3">let </span><span class="s1">id = </span><span class="s2">&quot;JSConsole&quot;</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">input = </span><span class="s2">&quot;&quot;</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">width = -</span><span class="s4">1</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">height = -</span><span class="s4">1</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">start = -</span><span class="s4">1</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">margin = </span><span class="s4">25</span><span class="s3">;</span>
+    <span class="s3">let </span><span class="s1">element = </span><span class="s3">null;</span>
+    <span class="s3">let </span><span class="s1">div = </span><span class="s3">null;</span>
+    <span class="s3">let </span><span class="s1">callback = </span><span class="s3">null;</span>
+    <span class="s3">if </span><span class="s1">(a3 !== undefined) {</span>
+        <span class="s1">id = a1</span><span class="s3">;</span>
+        <span class="s1">width = a2</span><span class="s3">;</span>
+        <span class="s1">height = a3</span><span class="s3">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(a2 !== undefined) {</span>
+        <span class="s1">width = a1</span><span class="s3">;</span>
+        <span class="s1">height = a2</span><span class="s3">;</span>
+    <span class="s1">} </span><span class="s3">else if </span><span class="s1">(a1 !== undefined) {</span>
+        <span class="s1">id = a1</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: write 
+     * Usage: console.write(str); 
+     * -------------------------- 
+     * Appends the HTML string to the end of the element. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">write(str) {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(div) {</span>
+            <span class="s1">div.innerHTML += str</span><span class="s3">;</span>
+            <span class="s1">div.scrollTop = div.scrollHeight</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(document.systemConsole.error) {</span>
+                <span class="s1">document.systemConsole.error(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">document.systemConsole.log(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: log 
+     * Usage: console.log(str); 
+     * ------------------------ 
+     * Prints the argument to the console, followed by a newline. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">log(str) {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(div) {</span>
+            <span class="s1">div.innerHTML += quoteHTML(</span><span class="s2">&quot;&quot; </span><span class="s1">+ str) + </span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="s3">;</span>
+            <span class="s1">div.scrollTop = div.scrollHeight</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s1">document.systemConsole.log(str)</span><span class="s3">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: println 
+     * Usage: console.println(str); 
+     * ---------------------------- 
+     * Prints the argument to the console, followed by a newline. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">println(str) {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(div) {</span>
+            <span class="s1">div.innerHTML += quoteHTML(</span><span class="s2">&quot;&quot; </span><span class="s1">+ str) + </span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="s3">;</span>
+            <span class="s1">div.scrollTop = div.scrollHeight</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(document.systemConsole.error) {</span>
+                <span class="s1">document.systemConsole.error(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">document.systemConsole.log(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: print 
+     * Usage: console.print(str); 
+     * -------------------------- 
+     * Prints the argument to the console with no terminating newline. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">print(str) {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(div) {</span>
+            <span class="s1">div.innerHTML += quoteHTML(</span><span class="s2">&quot;&quot; </span><span class="s1">+ str)</span><span class="s3">;</span>
+            <span class="s1">div.scrollTop = div.scrollHeight</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(document.systemConsole.error) {</span>
+                <span class="s1">document.systemConsole.error(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">document.systemConsole.log(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: clear 
+     * Usage: console.clear(); 
+     * ----------------------- 
+     * Clears the console. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">clear() {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(div) {</span>
+            <span class="s1">div.innerHTML = </span><span class="s2">&quot;&quot;</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(document.systemConsole.clear) {</span>
+                <span class="s1">document.systemConsole.clear()</span><span class="s3">;</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s3">if </span><span class="s1">(document.systemConsole.error) {</span>
+                    <span class="s1">document.systemConsole.error(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+                <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                    <span class="s1">document.systemConsole.log(</span><span class="s2">&quot;Console has not been installed&quot;</span><span class="s1">)</span><span class="s3">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* 
+     * Method: requestInput 
+     * Usage: console.requestInput(prompt, fn); 
+     * ---------------------------------------- 
+     * Requests input from the console.  If a prompt string is specified, that 
+     * string is printed on the console before requesting input.  When the user 
+     * types a newline character, the input is passed to the supplied callback 
+     * function fn.  For applications that need to accommodate multi-line input, 
+     * the callback function can return the string &quot;continue&quot;, which is treated 
+     * as a signal that the console should continue to wait for additional 
+     * input. 
+     */</span>
+
+    <span class="s3">function </span><span class="s1">requestInput(prompt</span><span class="s3">, </span><span class="s1">fn) {</span>
+        <span class="s1">initCheck()</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(fn === undefined) {</span>
+            <span class="s1">callback = prompt</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s1">print(prompt)</span><span class="s3">;</span>
+            <span class="s1">callback = fn</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s1">start = div.innerHTML.length</span><span class="s3">;</span>
+        <span class="s1">moveCursorToEnd()</span><span class="s3">;</span>
+        <span class="s1">input = </span><span class="s2">&quot;&quot;</span><span class="s3">;</span>
+        <span class="s1">div.focus()</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">/* Private functions */</span>
+
+    <span class="s3">function </span><span class="s1">quoteHTML(str) {</span>
+        <span class="s3">let </span><span class="s1">result = </span><span class="s2">&quot;&quot;</span><span class="s3">;</span>
+        <span class="s3">for </span><span class="s1">(</span><span class="s3">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s3">; </span><span class="s1">i &lt; str.length</span><span class="s3">; </span><span class="s1">i++) {</span>
+            <span class="s3">let </span><span class="s1">ch = str.charAt(i)</span><span class="s3">;</span>
+            <span class="s3">switch </span><span class="s1">(ch) {</span>
+                <span class="s3">case </span><span class="s2">' '</span><span class="s1">: ch = </span><span class="s2">&quot;&amp;nbsp;&quot;</span><span class="s3">; break;</span>
+                <span class="s3">case </span><span class="s2">'&lt;'</span><span class="s1">: ch = </span><span class="s2">&quot;&amp;lt;&quot;</span><span class="s3">; break;</span>
+                <span class="s3">case </span><span class="s2">'&gt;'</span><span class="s1">: ch = </span><span class="s2">&quot;&amp;gt;&quot;</span><span class="s3">; break;</span>
+                <span class="s3">case </span><span class="s2">'&amp;'</span><span class="s1">: ch = </span><span class="s2">&quot;&amp;amp;&quot;</span><span class="s3">; break;</span>
+                <span class="s3">case </span><span class="s2">'</span><span class="s3">\n</span><span class="s2">'</span><span class="s1">:</span>
+                    <span class="s3">if </span><span class="s1">(i === </span><span class="s4">0 </span><span class="s1">|| str.charAt(i - </span><span class="s4">1</span><span class="s1">) !== </span><span class="s2">'</span><span class="s3">\r</span><span class="s2">'</span><span class="s1">) {</span>
+                        <span class="s1">ch = </span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="s3">;</span>
+                    <span class="s1">}</span>
+                    <span class="s3">break;</span>
+                <span class="s3">case </span><span class="s2">'</span><span class="s3">\r</span><span class="s2">'</span><span class="s1">:</span>
+                    <span class="s3">if </span><span class="s1">(i === </span><span class="s4">0 </span><span class="s1">|| str.charAt(i - </span><span class="s4">1</span><span class="s1">) !== </span><span class="s2">'</span><span class="s3">\n</span><span class="s2">'</span><span class="s1">) {</span>
+                        <span class="s1">ch = </span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="s3">;</span>
+                    <span class="s1">}</span>
+                    <span class="s3">break;</span>
+            <span class="s1">}</span>
+            <span class="s1">result += ch</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s3">return </span><span class="s1">result</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s3">function </span><span class="s1">keydown(e) {</span>
+        <span class="s3">let </span><span class="s1">ch = String.fromCharCode(e.which || e.keyCode)</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(ch === </span><span class="s2">'</span><span class="s3">\x7F</span><span class="s2">' </span><span class="s1">|| ch === </span><span class="s2">'</span><span class="s3">\b</span><span class="s2">'</span><span class="s1">) keypress(e)</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s3">function </span><span class="s1">keypress(e) {</span>
+        <span class="s3">if </span><span class="s1">(!e.metaKey &amp;&amp; e.preventDefault) e.preventDefault()</span><span class="s3">;</span>
+        <span class="s1">scrollToEnd()</span><span class="s3">;</span>
+        <span class="s3">let </span><span class="s1">ch = String.fromCharCode(e.which || e.keyCode)</span><span class="s3">;</span>
+        <span class="s3">if </span><span class="s1">(ch === </span><span class="s2">'</span><span class="s3">\n</span><span class="s2">' </span><span class="s1">|| ch === </span><span class="s2">'</span><span class="s3">\r</span><span class="s2">'</span><span class="s1">) {</span>
+            <span class="s1">div.innerHTML += </span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="s3">;</span>
+            <span class="s1">callback(input)</span><span class="s3">;</span>
+        <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+            <span class="s3">if </span><span class="s1">(ch === </span><span class="s2">'</span><span class="s3">\x7F</span><span class="s2">' </span><span class="s1">|| ch === </span><span class="s2">'</span><span class="s3">\b</span><span class="s2">'</span><span class="s1">) {</span>
+                <span class="s3">if </span><span class="s1">(input.length &gt; </span><span class="s4">0</span><span class="s1">) {</span>
+                    <span class="s1">input = input.substring(</span><span class="s4">0</span><span class="s3">, </span><span class="s1">input.length - </span><span class="s4">1</span><span class="s1">)</span><span class="s3">;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">input += ch</span><span class="s3">;</span>
+            <span class="s1">}</span>
+            <span class="s1">div.innerHTML = div.innerHTML.substring(</span><span class="s4">0</span><span class="s3">, </span><span class="s1">start) +</span>
+                <span class="s2">&quot;&lt;font color=blue&gt;&quot; </span><span class="s1">+ quoteHTML(input) + </span><span class="s2">&quot;&lt;/font&gt;&quot;</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s1">moveCursorToEnd()</span><span class="s3">;</span>
+        <span class="s1">div.focus()</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s3">function </span><span class="s1">scrollToEnd() {</span>
+        <span class="s3">if </span><span class="s1">(div.scrollHeight &gt; div.scrollTop + div.clientHeight - margin) {</span>
+            <span class="s1">div.scrollTop = div.scrollHeight - div.clientHeight + margin</span><span class="s3">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s3">function </span><span class="s1">moveCursorToEnd() {</span>
+        <span class="s3">let </span><span class="s1">node = div.lastChild</span><span class="s3">;</span>
+        <span class="s3">while </span><span class="s1">(node !== </span><span class="s3">null </span><span class="s1">&amp;&amp; !(node </span><span class="s3">instanceof </span><span class="s1">Text)) {</span>
+            <span class="s1">node = node.lastChild</span><span class="s3">;</span>
+        <span class="s1">}</span>
+        <span class="s3">if </span><span class="s1">(node === </span><span class="s3">null</span><span class="s1">) </span><span class="s3">return;</span>
+        <span class="s3">let </span><span class="s1">range = document.createRange()</span><span class="s3">;</span>
+        <span class="s3">let </span><span class="s1">selection = window.getSelection()</span><span class="s3">;</span>
+        <span class="s1">range.selectNode(node)</span><span class="s3">;</span>
+        <span class="s1">range.collapse(</span><span class="s3">false</span><span class="s1">)</span><span class="s3">;</span>
+        <span class="s1">selection.removeAllRanges()</span><span class="s3">;</span>
+        <span class="s1">selection.addRange(range)</span><span class="s3">;</span>
+    <span class="s1">}</span>
+
+    <span class="s3">function </span><span class="s1">initCheck() {</span>
+        <span class="s3">if </span><span class="s1">(!element &amp;&amp; document.body) {</span>
+            <span class="s1">element = document.getElementById(id)</span><span class="s3">;</span>
+            <span class="s3">if </span><span class="s1">(!element) element = document.body</span><span class="s3">;</span>
+            <span class="s3">let </span><span class="s1">styleSource = window.getComputedStyle(element)</span><span class="s3">;</span>
+            <span class="s1">div = document.createElement(</span><span class="s2">&quot;div&quot;</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">div.align = </span><span class="s2">&quot;left&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.overflowY = </span><span class="s2">&quot;auto&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.overflowX = </span><span class="s2">&quot;auto&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.background = </span><span class="s2">&quot;white&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.fontFamily = </span><span class="s2">&quot;'Courier New',Courier,Monospaced&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.fontSize = </span><span class="s2">&quot;1em&quot;</span><span class="s3">;</span>
+            <span class="s1">div.style.fontWeight = </span><span class="s2">&quot;bold&quot;</span><span class="s3">;</span>
+            <span class="s3">if </span><span class="s1">(width === -</span><span class="s4">1</span><span class="s1">) {</span>
+                <span class="s1">div.style.width = styleSource.width</span><span class="s3">;</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">div.style.width = width + </span><span class="s2">&quot;px&quot;</span><span class="s3">;</span>
+            <span class="s1">}</span>
+            <span class="s3">if </span><span class="s1">(height === -</span><span class="s4">1</span><span class="s1">) {</span>
+                <span class="s3">if </span><span class="s1">(element !== document.body) {</span>
+                    <span class="s1">div.style.height = styleSource.height</span><span class="s3">;</span>
+                <span class="s1">}</span>
+            <span class="s1">} </span><span class="s3">else </span><span class="s1">{</span>
+                <span class="s1">div.style.height = height + </span><span class="s2">&quot;px&quot;</span><span class="s3">;</span>
+            <span class="s1">}</span>
+            <span class="s1">div.contentEditable = </span><span class="s3">true;</span>
+            <span class="s1">div.addEventListener(</span><span class="s2">&quot;keydown&quot;</span><span class="s3">, </span><span class="s1">keydown</span><span class="s3">, false</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">div.addEventListener(</span><span class="s2">&quot;keypress&quot;</span><span class="s3">, </span><span class="s1">keypress</span><span class="s3">, false</span><span class="s1">)</span><span class="s3">;</span>
+            <span class="s1">element.appendChild(div)</span><span class="s3">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s3">let </span><span class="s1">console = {</span>
+        <span class="s1">clear: clear</span><span class="s3">,</span>
+        <span class="s1">log: log</span><span class="s3">,</span>
+        <span class="s1">print: print</span><span class="s3">,</span>
+        <span class="s1">println: println</span><span class="s3">,</span>
+        <span class="s1">requestInput: requestInput</span><span class="s3">,</span>
+        <span class="s1">write: write</span>
+    <span class="s1">}</span><span class="s3">;</span>
+
+    <span class="s1">initCheck()</span><span class="s3">;</span>
+
+    <span class="s3">return </span><span class="s1">console</span><span class="s3">;</span>
+<span class="s1">}</span>
+
+<span class="s1">document.systemConsole = console</span><span class="s3">;</span>
+<span class="s1">console = JSConsole()</span><span class="s3">;</span>
+</pre>
+</body>
+</html>

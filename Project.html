@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<script src="https://kit.fontawesome.com/dbed6b114.js"
+        crossorigin="anonymous"> </script>
+<link rel = "icon" href="images/logo.png" type="image/png">
+</head>
+
+<body>
+<!-- header -->
+<header class = "header" id = "header">
+    <div class = "head-top">
+        <div class = "site-name">
+             <span>Brian Cornell</span>
+
+    </div>
+    <div class = "head-bottom flex">
+        <style>
+            header  {
+                background-image: url("music-notesHeader.jpg");
+            }
+
+            body {
+                background-color: #add8e6;
+            }
+        </style>
+        <h2> HOTEL PIANO</h2>
+        <p> This FINE HOTEL Is part of the musical hotel collection seen in each amazing city in the world
+            this hotel has multiple different layers of piano that may suit your need to play and enjoy music throughout the halls
+            as you go higher up the hotel there are better pianos and even automated pianos that will play song to you liking in
+            real piano sound
+
+        </p>
+
+
+        <button type = "button" class = "head-btn"> GET STARTED </button>
+    </div>
+
+</header>
+<!-- end of header -->
+<!-- side navbar -->
+<div class = "sidenav" id = "sidenav" >
+    <span class = "cancel-btn" id = "cancel-btn">
+        <i class = "fas fa-times"> </i>
+    </span>
+    <ul class = "navbar">
+        <li><a href = "#header">home</a></li>
+        <li><a href = "#services">services</a></li>
+        <li><a href = "#rooms">rooms</a></li>
+        <li><a href = "#customers">customer</a></li>
+    </ul>
+    <button class = "btn signup">sign up </button>
+    <button class = "btn log-in">log in </button>
+</div>
+<!-- end of sidebar -->
+<!-- fullscreen modal -->
+<div id = "modal"></div>
+<!-- end fullscreen modal -->
+<!-- body content -->
+<section class = "services sec-width" id = "services">
+    <div class = "title">
+        <h2> services </h2>
+    </div>
+    <div class = "services-container">
+            <!-- single service -->
+            <article class = "service">
+                <div class = "service-icon">
+                    <span>
+                        <i class = "fas fa-utensils"></i>
+                    </span>
+                </div>
+              <div class = "service-content">
+                  <h2> Food Service / Food Runner </h2>
+                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                      arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                      id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                      id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+                  </p>
+                  <button type = "button" class = "btn"> Know More </button>
+              </div>
+
+            </article>
+            <!-- end of single service -->
+
+        <!-- single service -->
+        <article class = "service">
+            <div class = "service-icon">
+                    <span>
+                        <i class = "fas fa-utensils"></i>
+                    </span>
+            </div>
+            <div class = "service-content">
+                <h2> HouseKeeping </h2>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                    arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                    id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                    id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+                </p>
+                <button type = "button" class = "btn"> Know More </button>
+            </div>
+
+        </article>
+        <!-- end of single service -->
+        <!-- single service -->
+        <article class = "service">
+            <div class = "service-icon">
+                    <span>
+                        <i class = "fas fa-utensils"></i>
+                    </span>
+            </div>
+            <div class = "service-content">
+                <h2> Room Security</h2>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                    arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                    id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                    id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+                </p>
+                <button type = "button" class = "btn"> Know More </button>
+            </div>
+
+        </article>
+        <!-- end of single service -->
+
+
+</section>
+<div class = "book">
+    <form class = "book-form">
+        <div class = "form-item">
+            <label for = "checkin-date">Check in date: </label>
+            <input type = "date" id = "checkin-date">
+        </div>
+            <div class = "form-item">
+                    <label for = "checkin-date">Check out date: </label>
+                    <input type = "date" id = "checkout-date">
+        </div>
+        <div class = "form-item">
+            <label for = "adult" > Adults: ></label>
+            <input type = "number" min = "1" value = "1" id = "adult">
+
+            <div class = "form-item">
+                <label for = "Children" > Children: ></label>
+                <input type = "number" min = "1" value = "1" id = "children">
+
+                <div class = "form-item">
+                    <label for = "rooms" > Rooms: ></label>
+                    <input type = "number" min = "1" value = "1" id = "room>
+
+        </div>
+                <div class = "form-Item">
+                    <input type = "submit" class ="btn" value = "Book Now">
+
+    </form>
+</div>
+
+<section class = "room sec-width" id = "rooms">
+    <div class="title">
+        <h2 rooms> </h2>
+    </div>
+    <div class = "rooms-container">
+<!-- single room -->
+        <article class = "room">
+            <div class = "room-image">
+                <img src = "Keyboard.jpeg" all = "room image" width="500" height="250">
+        <div class = "room text">
+            <h3> Keyboard Rooms 200-203 and 300-303</h3>
+                <ul
+                    <li>
+                        <i class = "fas fa-arrow-alt-circle-right"></i>
+                        lorem epsom
+                    </li>
+                        <i class = "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                    </li>
+
+                    <li>
+                        <i class =  "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                    </li>
+                </ul>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                    arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                    id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                    id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+
+                </p>
+                <p class = "rate">
+                    <span>$250.00 / </span> Per Night
+                </p>
+                <button type = "button" class = "btn"> <body> <a href="secondAndThirdFloorPay.html">Book Now</a></body></button>
+            </div>
+
+        </article>
+    </div>
+
+</section>
+<!-- end of single room -->
+<!-- single room -->
+<article class = "room">
+    <div class = "room-image">
+        <img src = "UprightPiano.jpeg" all = "room image" width="500" height="250">
+        <div class = "room text">
+            <h3> Upright Piano Rooms 400-403 and 500-503 </h3>
+            <ul>
+                <li>
+                    <i class = "fas fa-arrow-alt-circle-right"></i>
+                    lorem epsom
+                </li>
+                <i class = "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                </li>
+
+                <li>
+                    <i class =  "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                </li>
+            </ul>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+
+            </p>
+            <p class = "rate">
+                <span>$350.00 / </span> Per Night
+            </p>
+          <button type = "button" class = "btn"> <body> <a href="fourthAndFifthFloorPay.html">Book Now</a></body></button></button>
+        </div>
+
+
+</article>
+</div>
+
+</section>
+<!-- end of single room -->
+<!-- single room -->
+<article class = "room">
+    <div class = "room-image">
+        <img src = "grandPianoRoom.jpg" all = "room image" width="500" height="250">
+        <div class = "room text">
+            <h3> Grand Piano Rooms 204,304,404,504 </h3>
+            <ul>
+                <li>
+                    <i class = "fas fa-arrow-alt-circle-right"></i>
+                    lorem epsom
+                </li>
+                <i class = "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                </li>
+
+                <li>
+                    <i class =  "fas fa-arrow-alt-circle-right"></i>   lorem epsom
+                </li>
+            </ul>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+
+            </p>
+            <p class = "rate">
+                <span>$500.00 / </span> Per Night
+            </p>
+            <button type = "button" class = "btn"> <body> <a href="suitePay.html">Book Now</a></body></button>
+        </div>
+
+
+</article>
+</div>
+
+</section>
+<!-- end of single room -->
+<section class = "customers" id = "customers">
+    <div class = "sec width">
+        <div class = "title">
+            <h2>customers</h2>
+        </div>
+        <div class = "customers-container">
+            <!-- single customer -->
+            <div class = "customer">
+                <div class = "rating">
+                    <img src = "star-rating-3-and-a-half.png" all = "star Rating" width="100" height="20">
+                </div>
+                <h3> We Loved it</h3>
+                <p>                     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                    arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                    id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                    id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+                </p>
+                <img src = "KeyboardGrandpa.png" all = "customer image" width="600" height="400">
+
+            </div>
+            <span>Customer Name, Country</span>
+            <!-- end of single customer -->
+            <!-- single customer -->
+            <div class = "customer">
+                <div class = "rating">
+                    <img src = "star-rating-4.png" all = "star Rating" width="100" height="20">
+                </div>
+                <h3> Amazing Quality</h3>
+                <p>           Me and My husband have been coming to the Piano hotel for years and we really enjoyed the quality
+                    and detail that goes into choosing the pianos. We come here often and enjoy the ability to travel into
+                    New York and be able to play pianos in the comfort of our hotel room
+                </p>
+                <img src = "UprightPianoPerson.jpg" all = "customer image" width="600" height="400">
+
+            </div>
+            <span>Customer Name, Country</span>
+            <!-- end of single customer -->
+            <!-- single customer -->
+            <div class = "customer">
+                <div class = "rating">
+                    <img src = "star-rating-5.png" all = "star Rating" width="100" height="20">
+                </div>
+                <h3> Great Sounding Pianos!</h3>
+                <p>                     Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+                    arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam
+                    id leo in. Nibh nisl condimentum id venenatis a condimentum vitae. Consectetur libero
+                    id faucibus nisl tincidunt eget. Eget dolor morbi non arcu risus quis. A lacus vestibulum sed
+                </p>
+                <img src = "grandPianoPerson.jpg" all = "customer image" width="600" height="400">
+
+            </div>
+            <span>Customer Name, Country</span>
+            <!-- end of single customer -->
+        </div>
+    </div>
+</section>
+<!-- end of body content -->
+<!-- footer -->
+
+<footer class = "footer">
+    <div class = "footer-container">
+    </div>
+        <h2>About Us</h2>
+    <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare
+        arcu dui vivamus arcu felis bibendum ut tristique. Nisl vel pretium lectus quam </p>
+
+        <div></div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

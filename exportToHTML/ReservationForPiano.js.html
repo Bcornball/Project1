@@ -1,0 +1,213 @@
+<html>
+<head>
+<title>ReservationForPiano.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReservationForPiano.js</font>
+</center></td></tr></table>
+<pre><span class="s0">const </span><span class="s1">ROOM_RESERVATIONS = [</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">1</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;201&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">2</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;203&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">3</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;205&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">4</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;301&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">5</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;301&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">6</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;302&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">7</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;304&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">8</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;303&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/2/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">9</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;401&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">10</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;402&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">11</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;403&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">12</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;404&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">13</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;505&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/2/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/8/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+    <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">14</span><span class="s0">,</span>
+    <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;305&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+    <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+<span class="s1">}</span>
+
+<span class="s1">]</span><span class="s0">;</span>
+
+
+
+
+
+<span class="s0">const </span><span class="s1">ROOM_RESERVATIONSKeyboard = [</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">1</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;201&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">2</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;202&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">3</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;203&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">4</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;204&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">5</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;301&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">6</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;302&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">7</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;303&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">8</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;304&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/2/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span>
+    <span class="s1">}</span>
+<span class="s1">]</span><span class="s0">;</span>
+
+<span class="s0">const </span><span class="s1">ROOM_RESERVATIONUpright = [</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">1</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;201&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">2</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;202&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">3</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;203&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">4</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;204&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">5</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;301&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/1/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/3/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">6</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;302&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/14/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/18/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">7</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;303&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/5/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/6/2021&quot;</span>
+    <span class="s1">}</span><span class="s0">,</span>
+    <span class="s1">{</span>
+        <span class="s2">&quot;reservationId&quot;</span><span class="s1">: </span><span class="s3">8</span><span class="s0">,</span>
+        <span class="s2">&quot;room&quot;</span><span class="s1">: </span><span class="s2">&quot;304&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkIn&quot;</span><span class="s1">: </span><span class="s2">&quot;12/2/2021&quot;</span><span class="s0">,</span>
+        <span class="s2">&quot;checkOut&quot;</span><span class="s1">: </span><span class="s2">&quot;12/4/2021&quot;</span>
+    <span class="s1">}</span>
+<span class="s1">]</span><span class="s0">;</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<html>
+<head>
+<title>ReservationAvailability.js</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReservationAvailability.js</font>
+</center></td></tr></table>
+<pre><span class="s0">/* This function retrieves data from a JSON file and produces 
+   an array for each room that contains booked dates */</span>
+
+
+<span class="s2">const </span><span class="s1">ROOMS = [</span><span class="s3">&quot;201&quot;</span><span class="s2">, </span><span class="s3">&quot;202&quot;</span><span class="s2">, </span><span class="s3">&quot;203&quot;</span><span class="s2">, </span><span class="s3">&quot;204&quot;</span><span class="s2">, </span><span class="s3">&quot;205&quot;</span><span class="s2">,</span>
+    <span class="s3">&quot;301&quot;</span><span class="s2">, </span><span class="s3">&quot;302&quot;</span><span class="s2">, </span><span class="s3">&quot;303&quot;</span><span class="s2">, </span><span class="s3">&quot;304&quot;</span><span class="s2">, </span><span class="s3">&quot;305&quot;</span><span class="s2">,</span>
+    <span class="s3">&quot;401&quot;</span><span class="s2">, </span><span class="s3">&quot;402&quot;</span><span class="s2">, </span><span class="s3">&quot;403&quot;</span><span class="s2">, </span><span class="s3">&quot;404&quot;</span><span class="s2">, </span><span class="s3">&quot;405&quot;</span><span class="s2">,</span>
+    <span class="s3">&quot;501&quot;</span><span class="s2">, </span><span class="s3">&quot;502&quot;</span><span class="s2">, </span><span class="s3">&quot;503&quot;</span><span class="s2">, </span><span class="s3">&quot;504&quot;</span><span class="s2">, </span><span class="s3">&quot;505&quot;</span>
+<span class="s1">]</span><span class="s2">;</span>
+<span class="s2">const </span><span class="s1">KeyboardROOMS = [</span><span class="s3">&quot;201&quot; </span><span class="s2">, </span><span class="s3">&quot;202&quot; </span><span class="s2">, </span><span class="s3">&quot;203&quot; </span><span class="s2">, </span><span class="s3">&quot;204&quot; </span><span class="s2">, </span><span class="s3">&quot;301&quot; </span><span class="s2">, </span><span class="s3">&quot;302&quot; </span><span class="s2">, </span><span class="s3">&quot;303&quot; </span><span class="s2">, </span><span class="s3">&quot;304&quot; </span><span class="s1">]</span><span class="s2">;</span>
+<span class="s2">const </span><span class="s1">UprightROOMS = [</span><span class="s3">&quot;401&quot; </span><span class="s2">, </span><span class="s3">&quot;402&quot; </span><span class="s2">, </span><span class="s3">&quot;403&quot; </span><span class="s2">, </span><span class="s3">&quot;404&quot; </span><span class="s2">, </span><span class="s3">&quot;501&quot; </span><span class="s2">, </span><span class="s3">&quot;502&quot; </span><span class="s2">, </span><span class="s3">&quot;503&quot; </span><span class="s2">, </span><span class="s3">&quot;504&quot; </span><span class="s1">]</span><span class="s2">;</span>
+<span class="s2">const </span><span class="s1">SuiteROOMS = [</span><span class="s3">&quot;205&quot; </span><span class="s2">, </span><span class="s3">&quot;305&quot; </span><span class="s2">, </span><span class="s3">&quot;405&quot; </span><span class="s2">, </span><span class="s3">&quot;505&quot; </span><span class="s1">]</span><span class="s2">;</span>
+<span class="s0">// Make code to say that rooms 200 - 205 are a certain room and</span>
+<span class="s0">// make the rest other options of rooms</span>
+<span class="s0">// make 4 drop down lists from that exercise to create which number you want</span>
+<span class="s0">// when a number is used (by cookies?) than get rid of a certain room</span>
+<span class="s0">//add images to these selections after theres a drop down and click</span>
+<span class="s0">// make some of these room unavaliable</span>
+<span class="s0">//on conformation page calcuate datess * rate per day</span>
+<span class="s0">//conformation page ( reservation number ex &quot;number and)</span>
+
+
+
+
+<span class="s0">/* This function demonstrates how the findBookedDates function is used by calling it and then 
+   displaying a list of all the booked dates and dates booked for a specific room 
+ */</span>
+<span class="s0">/*function processKeyboardDates(data) { 
+    let bookedDates = findBookedDates(data); 
+ 
+    // Display a list of all rooms and the dates that are booked 
+    for (let i = 0; i &lt; KeyboardROOMS.length; i++) { 
+        console.log(ROOMS[i]); 
+        for (let j = 0; j &lt; bookedDates[i].length; j++) { 
+            console.log(bookedDates[i][j]); 
+        } 
+    } 
+ 
+ 
+    function processUprightDates(data) { 
+        let bookedDates = findBookedDates(data); 
+ 
+        // Display a list of all rooms and the dates that are booked 
+        for (let i = 0; i &lt; UprightROOMS.length; i++) { 
+            console.log(ROOMS[i]); 
+            for (let j = 0; j &lt; bookedDates[i].length; j++) { 
+                console.log(bookedDates[i][j]); 
+            } 
+        } 
+    } 
+ 
+        function processSuiteDates(data) { 
+            let bookedDates = findBookedDates(data); 
+ 
+            // Display a list of all rooms and the dates that are booked 
+            for (let i = 0; i &lt; SuiteROOMS.length; i++) { 
+                console.log(ROOMS[i]); 
+                for (let j = 0; j &lt; bookedDates[i].length; j++) { 
+                    console.log(bookedDates[i][j]); 
+                } 
+            } 
+        }*/</span>
+<span class="s2">function </span><span class="s1">processDatesKeyboard(data) {</span>
+    <span class="s2">let </span><span class="s1">bookedDates = findBookedDates(data)</span><span class="s2">;</span>
+
+    <span class="s0">// Display a list of all rooms and the dates that are booked</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; KeyboardROOMS.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s1">console.log(KeyboardROOMS[i])</span><span class="s2">;</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">j = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j &lt; bookedDates[i].length</span><span class="s2">; </span><span class="s1">j++) {</span>
+            <span class="s1">console.log(bookedDates[i][j])</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s2">function </span><span class="s1">processDatesUpright(data) {</span>
+    <span class="s2">let </span><span class="s1">bookedDates = findBookedDates(data)</span><span class="s2">;</span>
+
+    <span class="s0">// Display a list of all rooms and the dates that are booked</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; UprightROOMS.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s1">console.log(UprightROOMS[i])</span><span class="s2">;</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">j = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j &lt; bookedDates[i].length</span><span class="s2">; </span><span class="s1">j++) {</span>
+            <span class="s1">console.log(bookedDates[i][j])</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s2">function </span><span class="s1">processDatesSuites(data) {</span>
+    <span class="s2">let </span><span class="s1">bookedDates = findBookedDates(data)</span><span class="s2">;</span>
+
+    <span class="s0">// Display a list of all rooms and the dates that are booked</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; SuiteROOMS.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s1">console.log(SuiteROOMS[i])</span><span class="s2">;</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">j = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j &lt; bookedDates[i].length</span><span class="s2">; </span><span class="s1">j++) {</span>
+            <span class="s1">console.log(bookedDates[i][j])</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+
+<span class="s2">function </span><span class="s1">processDates(data) {</span>
+    <span class="s2">let </span><span class="s1">bookedDates = findBookedDates(data)</span><span class="s2">;</span>
+
+    <span class="s0">// Display a list of all rooms and the dates that are booked</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; ROOMS.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s1">console.log(ROOMS[i])</span><span class="s2">;</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">j = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j &lt; bookedDates[i].length</span><span class="s2">; </span><span class="s1">j++) {</span>
+            <span class="s1">console.log(bookedDates[i][j])</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">// Display booked dates for specified room</span>
+    <span class="s2">let </span><span class="s1">specificRoom = </span><span class="s3">&quot;403&quot;</span><span class="s2">;</span>
+    <span class="s2">let </span><span class="s1">roomIndex = ROOMS.indexOf(specificRoom)</span><span class="s2">;</span>
+    <span class="s2">if </span><span class="s1">(roomIndex !== -</span><span class="s4">1</span><span class="s1">) {</span>
+        <span class="s1">console.log(</span><span class="s3">&quot;Booked dates for room &quot; </span><span class="s1">+ specificRoom)</span><span class="s2">;</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; bookedDates[roomIndex].length</span><span class="s2">; </span><span class="s1">i++) {</span>
+            <span class="s1">console.log(bookedDates[roomIndex][i])</span><span class="s2">;</span>
+        <span class="s1">}</span>
+    <span class="s1">} </span><span class="s2">else </span><span class="s1">{</span>
+        <span class="s1">console.log (</span><span class="s3">&quot;There isn't a room called &quot; </span><span class="s1">+ specificRoom + </span><span class="s3">&quot; in our hotel&quot;</span><span class="s1">)</span><span class="s2">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">/* This function retrieves data from a JSON file and produces 
+   an array for each room that contains booked dates */</span>
+<span class="s0">//Runs array to order things</span>
+<span class="s2">function </span><span class="s1">findBookedDates(data) {</span>
+    <span class="s2">let </span><span class="s1">dates = []</span><span class="s2">;</span>
+    <span class="s0">// Set up an empty date array for each room in dates</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; ROOMS.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s1">dates[i] = []</span><span class="s2">;</span>
+    <span class="s1">}</span>
+    <span class="s0">// Go through the JSON file one reservation at a time</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; data.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s0">// Copy the data for one reservation to the variable resData for ease of reference</span>
+        <span class="s2">let </span><span class="s1">resData = data[i]</span><span class="s2">;</span>
+        <span class="s0">// Determine if the room in the reservation is a valid room.  If not, ignore the data.</span>
+        <span class="s2">let </span><span class="s1">roomIndex = ROOMS.indexOf(resData[</span><span class="s3">'room'</span><span class="s1">])</span><span class="s2">;</span>
+        <span class="s2">if </span><span class="s1">(roomIndex !== -</span><span class="s4">1</span><span class="s1">) {</span>
+            <span class="s0">// Add each of the dates between check In and check Out to the relevant array in dates</span>
+            <span class="s2">let </span><span class="s1">checkOut = </span><span class="s2">new </span><span class="s1">Date(resData[</span><span class="s3">'checkOut'</span><span class="s1">])</span><span class="s2">;</span>
+            <span class="s2">let </span><span class="s1">bookedDate = </span><span class="s2">new </span><span class="s1">Date(resData[</span><span class="s3">'checkIn'</span><span class="s1">])</span><span class="s2">;</span>
+            <span class="s2">while </span><span class="s1">(bookedDate.toDateString() !== checkOut.toDateString()) {</span>
+                <span class="s1">dates[roomIndex].push(bookedDate.toDateString())</span><span class="s2">;</span>
+                <span class="s1">bookedDate.setDate(bookedDate.getDate() + </span><span class="s4">1</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">// Tidy up the date arrays</span>
+    <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">i = </span><span class="s4">0</span><span class="s2">; </span><span class="s1">i &lt; dates.length</span><span class="s2">; </span><span class="s1">i++) {</span>
+        <span class="s0">// Sort all the dates for each room into chronological order</span>
+        <span class="s1">dates[i].sort(</span><span class="s2">function </span><span class="s1">(a</span><span class="s2">, </span><span class="s1">b) {</span>
+            <span class="s2">return new </span><span class="s1">Date(a) - </span><span class="s2">new </span><span class="s1">Date(b)</span>
+        <span class="s1">})</span>
+        <span class="s0">// Remove any duplicated dates in the JSON file</span>
+        <span class="s2">for </span><span class="s1">(</span><span class="s2">let </span><span class="s1">j = dates[i].length - </span><span class="s4">1</span><span class="s2">; </span><span class="s1">j &gt; </span><span class="s4">0</span><span class="s2">; </span><span class="s1">j--){</span>
+            <span class="s2">if </span><span class="s1">(dates[i][j] === dates[i][j-</span><span class="s4">1</span><span class="s1">]){</span>
+                <span class="s1">dates[i].splice([j]</span><span class="s2">, </span><span class="s4">1</span><span class="s1">)</span><span class="s2">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s2">return </span><span class="s1">dates</span><span class="s2">;</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
